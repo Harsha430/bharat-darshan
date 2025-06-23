@@ -1,0 +1,45 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Posts collection rules
+    match /posts/{postId} {
+      // Anyone can read posts
+      allow read: if true;
+      
+      // Only admins can create posts
+      allow create: if request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+      
+      // Only the author can update/delete their posts
+      allow update, delete: if request.auth != null &&
+        request.auth.uid == resource.data.authorId;
+    }
+    
+    // Users collection rules
+    match /users/{userId} {
+      // Users can read and write their own data
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Admins can read all user data (for moderation)
+      allow read: if request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+    
+    // Comments collection rules
+    match /comments/{commentId} {
+      // Anyone can read comments
+      allow read: if true;
+
+      // Only authenticated users can create comments
+      allow create: if request.auth != null &&
+        request.auth.uid != null &&
+        request.resource.data.authorId == request.auth.uid;
+
+      // Only the original commenter can update/delete their own comments
+      // Even admins cannot modify other users' comments
+      allow update, delete: if request.auth != null &&
+        request.auth.uid == resource.data.authorId;
+    }
+  }
+}

@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: #333333;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF9933;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e6851a;
+}
+
+/* Reading progress bar */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: linear-gradient(90deg, #FF9933, #138808);
+  z-index: 1000;
+  transition: width 0.1s ease;
+}
+
+/* Quote box styling */
+.quote-box {
+  border-left: 4px solid #FF9933;
+  background: linear-gradient(135deg, rgba(255, 153, 51, 0.1), rgba(19, 136, 8, 0.05));
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Responsive quote box for larger screens */
+@media (min-width: 768px) {
+  .quote-box {
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+}
+
+/* Removed CSS quote since we use FontAwesome quote icon */
+
+/* Animation classes */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Button hover effects */
+.btn-primary {
+  @apply bg-saffron text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-orange-600 hover:shadow-lg transform hover:-translate-y-1;
+}
+
+.btn-secondary {
+  @apply bg-green text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:bg-green-600 hover:shadow-lg transform hover:-translate-y-1;
+}
+
+/* Rich text content styling */
+.rich-content h1 {
+  @apply text-3xl font-bold text-darkGray mb-4 mt-6;
+}
+
+.rich-content h2 {
+  @apply text-2xl font-semibold text-darkGray mb-3 mt-5;
+}
+
+.rich-content h3 {
+  @apply text-xl font-semibold text-gray-700 mb-2 mt-4;
+}
+
+.rich-content h4 {
+  @apply text-lg font-medium text-gray-700 mb-2 mt-3;
+}
+
+.rich-content p {
+  @apply mb-4 leading-relaxed text-gray-800;
+}
+
+.rich-content ul, .rich-content ol {
+  @apply mb-4 ml-6;
+}
+
+.rich-content li {
+  @apply mb-2 leading-relaxed;
+}
+
+.rich-content blockquote {
+  @apply border-l-4 border-saffron bg-gradient-to-r from-saffron/10 to-green/5 p-4 my-6 rounded-r-lg italic;
+}
+
+.rich-content a {
+  @apply text-saffron hover:text-orange-600 underline transition-colors duration-300;
+}
+
+.rich-content img {
+  @apply max-w-full h-auto rounded-lg my-4;
+}
+
+.rich-content strong {
+  @apply font-semibold text-darkGray;
+}
+
+.rich-content em {
+  @apply italic;
+}
+
+.rich-content code {
+  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+}
+
+.rich-content pre {
+  @apply bg-gray-100 p-4 rounded-lg overflow-x-auto my-4;
+}
+
+.rich-content .ql-align-center {
+  @apply text-center;
+}
+
+.rich-content .ql-align-right {
+  @apply text-right;
+}
+
+.rich-content .ql-align-justify {
+  @apply text-justify;
+}
+
+/* Hero background styles - now handled via inline styles for better reliability */
